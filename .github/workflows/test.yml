@@ -7,8 +7,9 @@ jobs:
   cargo:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/cache@v3
-        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
+      - name: a11ywatch cache
+        uses: actions/cache@v3
+        id: a11watch-cache
         with:
           path: |
             /usr/local/lib/node_modules/@a11ywatch/a11ywatch
@@ -16,7 +17,8 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - uses: actions/cache@v3
+      - name: cargo cache
+        uses: actions/cache@v3
         id: cache
         with:
           path: |
@@ -30,9 +32,9 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: cargo install a11ywatch_cli
       - name: build
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: a11ywatch build --standalone --local
+        if: steps.a11watch-cache.outputs.cache-hit != 'true'
+        run: a11ywatch build --local
       - name: Start A11yWatch Service
-        run: a11ywatch start --standalone --local
+        run: a11ywatch start --local
       - name: Scan
         run: a11ywatch scan --url https://www.google.com
