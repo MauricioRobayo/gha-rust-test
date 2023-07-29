@@ -1,0 +1,8 @@
+name: Test
+on: [pull_request]
+jobs:
+  lintunittesting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test cargo
+        run: cargo --version
