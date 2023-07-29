@@ -32,7 +32,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: cargo install a11ywatch_cli
       - name: build
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: a11ywatch build --standalone --local
       - name: Start A11yWatch Service
         run: a11ywatch start --standalone --local
