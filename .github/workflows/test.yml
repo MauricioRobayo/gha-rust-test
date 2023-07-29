@@ -20,9 +20,9 @@ jobs:
       - name: install a11ywatch
         if: steps.cache.outputs.cache-hit != 'true'
         run: cargo install a11ywatch_cli
-      # - name: Build A11yWatch Service
-      #   shell: bash
-      #   run: a11ywatch build --standalone --local
+      - name: Build A11yWatch Service
+        shell: bash
+        run: a11ywatch --version
       # - name: Start A11yWatch Service
       #   shell: bash
       #   run: a11ywatch start --standalone --local
