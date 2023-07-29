@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/cache@v3
+        id: cache
         with:
           path: |
             ~/.cargo/bin/
@@ -17,6 +18,7 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: install a11ywatch
+        if: steps.cache.outputs.cache-hit != 'true'
         run: cargo install a11ywatch_cli
       - name: Build A11yWatch Service
         shell: bash
