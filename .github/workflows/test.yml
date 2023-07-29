@@ -1,5 +1,8 @@
-name: Test
-on: [pull_request]
+name: Test Cargo
+on:
+  push:
+    branches:
+      - main
 jobs:
   lintunittesting:
     runs-on: ubuntu-latest
