@@ -1,11 +1,13 @@
-name: Test Cargo
+name: Test
 on:
   push:
     branches:
       - main
 jobs:
-  lintunittesting:
+  cargo:
     runs-on: ubuntu-latest
     steps:
       - name: test cargo
-        run: cargo --version
+        run: cargo install a11ywatch_cli
+      - name: test cargo
+        run: a11ywatch build
